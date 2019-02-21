@@ -63,16 +63,14 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - manual_build:
-          type: approval
       - test_build
       - debug_build:
           requires:
             - test_build
       - rc_build:
+          type: approval
           requires:
             - test_build
-            - manual_build
           filters:
             branches:
               only: 
