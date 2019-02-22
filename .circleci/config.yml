@@ -71,6 +71,7 @@ workflows:
             branches:
               only:
                 - dev
+                - master
       - rc_build:
           type: approval
           requires:
