@@ -67,6 +67,10 @@ workflows:
       - debug_build:
           requires:
             - test_build
+          filters:
+            branches:
+              only:
+                - dev
       - rc_build:
           type: approval
           requires:
