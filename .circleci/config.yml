@@ -30,7 +30,7 @@ jobs:
           name: Run Code Coverage
           command: ./gradlew jacocoTestReport --stacktrace  
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: app/build/coverage-report 
+          path: build/coverage-report 
           destination: reports
   debug_build:
     working_directory: ~/code
