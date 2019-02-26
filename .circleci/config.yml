@@ -28,7 +28,7 @@ jobs:
           destination: eports/test-results
       - run:
           name: Run Code Coverage
-          command: ./gradlew jacocoTestReport --stacktrace  
+          command: ./gradlew jacocoTestCoverageVerification --stacktrace  
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: build/coverage-report 
           destination: reports/coverage
