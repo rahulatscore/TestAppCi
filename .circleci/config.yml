@@ -25,7 +25,7 @@ jobs:
           destination: reports/lint
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: app/build/reports/tests
-          destination: test-results
+          destination: eports/test-results
       - run:
           name: Run Code Coverage
           command: ./gradlew jacocoTestReport --stacktrace  
