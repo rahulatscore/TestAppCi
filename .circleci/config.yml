@@ -19,16 +19,19 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Run Tests
-          command: ./gradlew lint test
-      - run:
-          name: Run Coverage
-          command: ./gradlew jacocoTestReport --stacktrace    
+          command: ./gradlew lint test  
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: app/build/reports
+          path: app/build/reports 
           destination: reports
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: app/build/reports/tests
           destination: test-results
+      - run:
+          name: Run Code Coverage
+          command: ./gradlew jacocoTestReport --stacktrace  
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+          path: app/build/coverage-report 
+          destination: reports
   debug_build:
     working_directory: ~/code
     docker:
