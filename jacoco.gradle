@@ -76,10 +76,6 @@ task jacocoTestCoverageVerification(type: JacocoCoverageVerification, dependsOn:
 
     executionData = files(execution)
 
-    doLast() {
-        print "file://${reports.html.destination}/index.html"
-    }
-
     onlyIf = {
         true
     }
