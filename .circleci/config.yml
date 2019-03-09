@@ -64,7 +64,28 @@ jobs:
       - store_artifacts:
           path: app/build/outputs/apk/
           destination: apks/ 
-  
+  danger_check:
+    working_directory: ~/danger
+    docker:
+    - image: circleci/android:api-28
+      environment:
+      JVM_OPTS: -Xmx3200m
+    steps:
+    - checkout
+    - run: gem update --system 2.4.8
+    - run: gem install bundler -v '1.17.3'
+    - restore_cache:
+        key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile" }}
+    - run: bundle install --path vendor/bundle
+    - save_cache:
+        key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile" }}
+        paths:
+        - vendor/bundle
+    - run: git config --global user.email "rahul.patel@thescore.com"
+    - run: git config --global user.name "Rahul Patel"
+    - run: bundle exec rake specs
+    - run: '[ ! -z $DANGER_GITHUB_API_TOKEN ] && bundle exec danger || echo "Skipping Danger for External Contributor"'
+    - run: bundle exec danger init --mousey --impatient
 workflows:
   version: 2
   workflow:
