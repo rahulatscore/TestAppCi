@@ -90,6 +90,7 @@ workflows:
   version: 2
   workflow:
     jobs:
+      - danger_check
       - test_build
       - debug_build:
           requires:
