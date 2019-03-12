@@ -72,20 +72,7 @@ jobs:
       JVM_OPTS: -Xmx3200m
     steps:
     - checkout
-    - run: gem update --system 2.5
-    - run: gem install bundler
-    - restore_cache:
-        key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile" }}
-    - run: bundle install --path vendor/bundle
-    - save_cache:
-        key: gem-cache-{{ .Branch }}-{{ checksum "Gemfile" }}
-        paths:
-        - vendor/bundle
-    - run: git config --global user.email "rahul.patel@thescore.com"
-    - run: git config --global user.name "Rahul Patel"
-    - run: bundle exec rake specs
-    - run: '[ ! -z $DANGER_GITHUB_API_TOKEN ] && bundle exec danger || echo "Skipping Danger for External Contributor"'
-    - run: bundle exec danger init --mousey --impatient
+    - run: bundle exec danger --verbose
 workflows:
   version: 2
   workflow:
