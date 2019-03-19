@@ -22,9 +22,9 @@ jobs:
           command: ./gradlew lint test
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: app/build/reports
-          destination: reports
+          destination: test-results
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: app/build/reports/tests
+          path: app/build/reports
           destination: test-results
   debug_build:
     working_directory: ~/code
